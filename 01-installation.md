@@ -15,3 +15,30 @@ and then to interact with you Kubernetes cluster
 ```bash
 kubectl get po -A
 ```
+
+
+
+## Check Installation
+To check that `minikube` has been installed successfully, we will run the following commands. Before, running this command make sure your runtime or hypervisor (such as Docker or VirtualBox) are running.
+### Start Minikube
+Run the following commands to start the `minikube` cluster
+```bash
+minikube start
+```
+<img width="1123" alt="image" src="https://github.com/javadebadi/kubernetes-tutorial/assets/21107499/70c40029-be84-4a5e-adeb-39a66f03b7eb">
+
+### Check Status of the Minikube
+Run the following command and carefully investigate what you see in the screen:
+```bash
+minikube status
+```
+<img width="1127" alt="image" src="https://github.com/javadebadi/kubernetes-tutorial/assets/21107499/e86f0bb8-86c4-4028-aa5f-1d20071ef9ec">
+
+### Stop Minikube
+Now, run the following command to stop the minikube
+```bash
+minikube stop
+```
+<img width="1125" alt="image" src="https://github.com/javadebadi/kubernetes-tutorial/assets/21107499/febdec31-014b-4b64-ba8e-6f3093d08895">
+
+
