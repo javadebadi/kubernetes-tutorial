@@ -41,4 +41,13 @@ minikube stop
 ```
 <img width="1125" alt="image" src="https://github.com/javadebadi/kubernetes-tutorial/assets/21107499/febdec31-014b-4b64-ba8e-6f3093d08895">
 
+## Check Version
+To check the version of the `minikube` run:
+```bash
+minkube version
+```
+
+<img width="1120" alt="image" src="https://github.com/javadebadi/kubernetes-tutorial/assets/21107499/8f3849a2-febb-4c0b-947e-535988bb8aa2">
+
+
 
