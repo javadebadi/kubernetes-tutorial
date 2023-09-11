@@ -7,5 +7,5 @@
 - [05-kubernetes-dashboard](05-kubernetes-dashboard.md)
 - [06-kubernetes-API](06-kubernetes-API.md)
 - [07-Namespaces](07-Namespaces.md)
-
+- [08-Pods](08-pods.md)
 
