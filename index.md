@@ -9,3 +9,6 @@
 - [07-Namespaces](07-Namespaces.md)
 - [08-Pods](08-pods.md)
 
+
+## Managed Kubernetes Services
+- [Elastic Kubernetes Services (EKS)](EKS.md)
