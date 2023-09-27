@@ -1,0 +1,15 @@
+# A simple example of a ClusterConfig object:
+---
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: eks-tutorial-cluster
+  region: ca-central-1
+  tags:
+    project: eks-tutorial
+
+nodeGroups:
+  - name: ng-1
+    instanceType: t2.micro
+    desiredCapacity: 1

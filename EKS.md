@@ -15,9 +15,9 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: cluster-1
+  name: eks-tutorial-cluster
   region: ca-central-1
-  tag:
+  tags:
     project: eks-tutorial
 
 nodeGroups:
@@ -25,4 +25,22 @@ nodeGroups:
     instanceType: t2.micro
     desiredCapacity: 1
 
+```
+
+
+To create EKS cluster we run the following command:
+```bash
+eksctl create cluster -f cluster.yaml
+```
+After you run this command, you may see that the process takes long time. In particular, I was viewing `waiting for CloudFormation stack "eksctl-eks-tutorial-cluster-cluster" ` and I was thinking something has went wrong. However, it is normal and the processes takes about 20 minutes as mentioned [here](https://stackoverflow.com/questions/65756827/eksctl-create-cluster-stuck-waiting-for-cloudformation-stack).
+
+To view details of all clusters run the following command
+```bash
+eksctl get cluster
+```
+
+To delete a cluster we run the following command:
+
+```bash
+eksctl delete cluster -f cluster.yaml
 ```
