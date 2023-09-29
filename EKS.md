@@ -54,7 +54,7 @@ eksctl delete cluster -f cluster.yaml
 
 
 ## Deploy Application on EKS Cluster
-In this section, we deploy the application on the cluster. First, create a cluster as we discussed in <a href="#create-cluster"></a> and then continue.
+In this section, we deploy the application on the cluster. First, create a cluster as we discussed in <a href="#create-cluster">here</a> and then continue.
 ### Create Namespace
 The first step is to create a namespace to organize resources for a project. The [./eks/namespace.yaml]("./eks/namespace.yaml") yaml file has the content for creating the namespace we want.
 ```yaml
