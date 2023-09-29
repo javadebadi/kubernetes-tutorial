@@ -28,6 +28,7 @@ nodeGroups:
 ```
 
 ### Create Cluster
+<span id="create-cluster"></span>
 To create an EKS cluster we run the following command:
 ```bash
 eksctl create cluster -f cluster.yaml
@@ -50,3 +51,24 @@ To delete a cluster we run the following command:
 eksctl delete cluster -f cluster.yaml
 ```
 <img width="1610" alt="image" src="https://github.com/javadebadi/kubernetes-tutorial/assets/21107499/8109fc68-9472-485f-bd9a-6865b0c8ae5f">
+
+
+## Deploy Application on EKS Cluster
+In this section, we deploy the application on the cluster. First, create a cluster as we discussed in <a href="#create-cluster"></a> and then continue.
+### Create Namespace
+The first step is to create a namespace to organize resources for a project. The [./eks/namespace.yaml]("./eks/namespace.yaml") yaml file has the content for creating the namespace we want.
+```yaml
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: staging
+```
+Now, to create a namespace execute:
+```bash
+kubectl apply -f eks/namespace.yaml
+```
+
+
+## Make Application Accessible on Internet
+[AWS Load Balancer Controller](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
+[Inbound Access from Internet](https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
