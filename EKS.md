@@ -68,6 +68,38 @@ Now, to create a namespace execute:
 kubectl apply -f eks/namespace.yaml
 ```
 
+### Create Deployment
+The seconds step is to create the deployment yaml file for the application we want to deploy. For simplicity, we will deploy the nginx app which has a public
+image in the Docker hub. The content of the file `./eks/deployment.yaml` is as follows:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: staging
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+```
+To create this deployment run the following command:
+```bash
+kubectl apply -f eks/deployment.yaml
+```
+
 
 ## Make Application Accessible on Internet
 [AWS Load Balancer Controller](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
