@@ -100,6 +100,24 @@ To create this deployment run the following command:
 kubectl apply -f eks/deployment.yaml
 ```
 
+### Create Services
+The third step is to create service yaml file for the application. The content of the `./eks/service.yaml` file that we will apply is show in the below
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: staging
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  type: NodePort
+  selector:
+    app: nginx  
+```
+
 
 ## Make Application Accessible on Internet
 [AWS Load Balancer Controller](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
