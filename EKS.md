@@ -131,13 +131,20 @@ Here you see that there are 6 subnets and there is the word "private" in name of
 - Tag for private subnets:
   - Key: kubernetes.io/role/internal-elb
   - Value: 1
+  - Key: kubernetes.io/cluster/eks-tutorial-cluster
+  - Value: shared
 
 - Tag for public subnets:
   - Key: kubernetes.io/role/elb
   - Value: 1
+  - Key: kubernetes.io/cluster/eks-tutorial-cluster
+  - Value: shared
 
-Note that, if your subnet already has the necessary tag, you don't need to do this step. In my cluster, it was already there but you may need to this manually if it is not there.
+Note that, if your subnet already has the necessary tag, you don't need to do this step. In my cluster, one of the tags was already there but you may need to do this manually if it is not there. I only needed to add the other tag. The tags automatically created for me was like this:
 <img width="1096" alt="image" src="https://github.com/javadebadi/kubernetes-tutorial/assets/21107499/0c543ecd-10d3-48f4-92c8-d79db6b8570d">
+Then I added the tag `kubernetes.io/cluster/eks-tutorial-cluster: shared` to all of the private and public subnets.
+<img width="1097" alt="image" src="https://github.com/javadebadi/kubernetes-tutorial/assets/21107499/e3c0d330-11af-4bc8-8d38-fd5d5d0e77aa">
+
 
 
 
