@@ -136,6 +136,9 @@ Here you see that there are 6 subnets and there is the word "private" in name of
   - Key: kubernetes.io/role/elb
   - Value: 1
 
+Note that, if your subnet already has the necessary tag, you don't need to do this step. In my cluster, it was already there but you may need to this manually if it is not there.
+<img width="1096" alt="image" src="https://github.com/javadebadi/kubernetes-tutorial/assets/21107499/0c543ecd-10d3-48f4-92c8-d79db6b8570d">
+
 
 
 
