@@ -121,6 +121,21 @@ spec:
 [Inbound Access from Internet](https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
 Here we want our application to be accessible from the Internet. In order to this, we need to add some tags to the VPC related to the cluster we have created.
 Go to your AWS console, in the region you have created your cluster. Search for VPC in AWS console. Inside, VPC service page, filter list of VPC to show "eks-tutorial-cluster" VPC. In the below, I see the results for my AWS account:
+<img width="1099" alt="image" src="https://github.com/javadebadi/kubernetes-tutorial/assets/21107499/00814d56-26a8-4f1a-b604-2430cad2984b">
+
+Click on the **Subnets** from the left menu bar and again filter for "eks-tutorial-cluster". You will see following subnets:
+<img width="1096" alt="image" src="https://github.com/javadebadi/kubernetes-tutorial/assets/21107499/f23d798e-93fe-46f2-899e-37d758880c77">
+
+Here you see that there are 6 subnets and there is the word "private" in name of three of them and the other three subnet has the word "public". We should add tags to these clusters based on their name, i.e, based on whether they are private or public.
+
+- Tag for private subnets:
+  - Key: kubernetes.io/role/internal-elb
+  - Value: 1
+
+- Tag for public subnets:
+  - Key: kubernetes.io/role/elb
+  - Value: 1
+
 
 
 
