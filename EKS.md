@@ -117,6 +117,11 @@ spec:
   selector:
     app: nginx  
 ```
+### Make Subnets of Cluster's VPC Accessible
+[Inbound Access from Internet](https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
+Here we want our application to be accessible from the Internet. In order to this, we need to add some tags to the VPC related to the cluster we have created.
+Go to your AWS console, in the region you have created your cluster. Search for VPC in AWS console. Inside, VPC service page, filter list of VPC to show "eks-tutorial-cluster" VPC. In the below, I see the results for my AWS account:
+
 
 
 ### Install Cert-manager
@@ -128,4 +133,3 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 
 ## Make Application Accessible on Internet
 [AWS Load Balancer Controller](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
-[Inbound Access from Internet](https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
