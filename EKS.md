@@ -147,6 +147,65 @@ Then I added the tag `kubernetes.io/cluster/eks-tutorial-cluster: shared` to all
 
 
 
+### Make Application Accessible on Internet
+Use th guide in [AWS Load Balancer Controller](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html) for this step.
+
+#### Create IAM Policy
+In my case, first I download the `iam_plicy.json`:
+```bash
+curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
+```
+
+Then I move the downloaded file to eks folder. Then, I create IAM policy using this command
+```bash
+aws iam create-policy \
+    --policy-name AWSLoadBalancerControllerIAMPolicy \
+    --policy-document file://eks/iam_policy.json
+```
+
+You will get similar response as follows:
+```json
+{
+    "Policy": {
+        "PolicyName": "AWSLoadBalancerControllerIAMPolicy",
+        "PolicyId": "ANPAWCIJBWFHITCRXR2WZ",
+        "Arn": "arn:aws:iam::417167683918:policy/AWSLoadBalancerControllerIAMPolicy",
+        "Path": "/",
+        "DefaultVersionId": "v1",
+        "AttachmentCount": 0,
+        "PermissionsBoundaryUsageCount": 0,
+        "IsAttachable": true,
+        "CreateDate": "2023-10-02T05:13:31+00:00",
+        "UpdateDate": "2023-10-02T05:13:31+00:00"
+    }
+}
+```
+You will need the "Arn" value of this response later.
+
+### Create IAM Role
+First run this command to associate IAM OIDC provider with the cluster:
+```bash
+eksctl utils associate-iam-oidc-provider --region=ca-central-1 --cluster=eks-tutorial-cluster --approve
+```
+
+Then we create an IAM role with this policy attached and associate it with our EKS cluster.
+
+```bash
+eksctl create iamserviceaccount \
+  --cluster=eks-tutorial-cluster \
+  --namespace=kube-system \
+  --name=aws-load-balancer-controller \
+  --role-name AmazonEKSLoadBalancerControllerRole \
+  --attach-policy-arn=arn:aws:iam::417167683918:policy/AWSLoadBalancerControllerIAMPolicy \
+  --approve
+```
+
+
+Check
+```bash
+kubect get sa -n kube-system
+```
+
 
 
 ### Install Cert-manager
@@ -156,5 +215,37 @@ Read [this document](https://cert-manager.io/docs/installation/) to see how to i
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.1/cert-manager.yaml
 ```
 
-## Make Application Accessible on Internet
-[AWS Load Balancer Controller](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
+```bash
+kubectl get pods -n cert-manager
+```
+
+```bash
+curl -Lo v2_5_4_full.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.5.4/v2_5_4_full.yaml
+```
+
+```bash
+sed -i.bak -e '596,604d' ./v2_5_4_full.yaml
+```
+
+```bash
+sed -i.bak -e 's|your-cluster-name|eks-tutorial-cluster|' ./v2_5_4_full.yaml
+```
+
+add arguments for region and vpc id in v2_5_4_full.yaml and run
+```bash
+kubectl apply -f eks/v2_5_4_full.yaml
+```
+
+```bash
+curl -Lo v2_5_4_ingclass.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.5.4/v2_5_4_ingclass.yaml
+
+```
+
+```bash
+kubectl apply -f eks/v2_5_4_ingclass.yaml
+```
+
+Verify installtion
+```bash
+kubectl get deployment -n kube-system aws-load-balancer-controller
+```
