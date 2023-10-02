@@ -119,6 +119,13 @@ spec:
 ```
 
 
+### Install Cert-manager
+Cert-manager adds certificates and certificate issuers as resource types in Kubernetes clusters, and simplifies the process of obtaining, renewing and using those certificates. When running web applications on EKS, you often need to secure the traffic with HTTPS. Cert-manager can automatically provision SSL/TLS certificates for your Ingress resources, ensuring that incoming traffic is encrypted.
+Read [this document](https://cert-manager.io/docs/installation/) to see how to install certificate manager. To apply this on your Kubernetes cluster run the following command
+```bash
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.1/cert-manager.yaml
+```
+
 ## Make Application Accessible on Internet
 [AWS Load Balancer Controller](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
 [Inbound Access from Internet](https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
