@@ -249,3 +249,12 @@ Verify installtion
 ```bash
 kubectl get deployment -n kube-system aws-load-balancer-controller
 ```
+
+### Ingress
+```
+kubectl apply -f eks/ingress.yaml
+```
+
+### Final Result
+After this open load balancers in your AWS console and see the DNS for the application load balancer you created. You should see the following
+<img width="774" alt="image" src="https://github.com/javadebadi/kubernetes-tutorial/assets/21107499/df1b608f-cff7-4a2c-b63f-af9246ee1fff">
