@@ -2,6 +2,11 @@
 
 One way to access and manage a Kubernetes cluster is by using a CLI tool called `kubectl`.
 
+There are other CLI tools for Kubernetes:
+- `kubie`
+- `k9s`
+After getting familiar with `kubectl` and Kubernetes you can try this CLI tools which can increase your productivity in terminal.
+
 ## Install Kubectl
 To install `kubectl` in MacOS do the following:
 ```bash
