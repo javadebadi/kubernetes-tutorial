@@ -12,3 +12,13 @@
 
 ## Managed Kubernetes Services
 - [Elastic Kubernetes Services (EKS)](EKS.md)
+
+## Tips
+When we use `kubectl`, a command line tool to work with Kubernetes, we print a lot of information in yaml format in the terminal. To improve terminal content visually we recommend to install `pygments`:
+```bash
+pip install Pygments
+```
+Then, you can pipe your outputs as follows to have visually informative results on your terminal screen:
+```bash
+cat yourfile.yaml | pygmentize -l yaml
+```
