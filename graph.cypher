@@ -33,6 +33,11 @@ MERGE(containerd: KubernetesTool:Software {
     category: "Container Runtime"
 }
 )
+MERGE(cri_o: KubernetesTool:Software {
+    name: "CRI-O",
+    category: "Container Runtime"
+}
+)
 
 // k8 objects
 MERGE(configmap:KubernetesObject {name: "ConfigMap"})
@@ -110,6 +115,7 @@ CREATE (learn_kubernetes_basics_create_cluster)-[:IS_PREREQUISITE_OF]->(learn_ku
 CREATE (kubernetes)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
 CREATE (kubernetes)-[:IS_AN_IMPLEMENTATION_OF]->(container_orchestration_tools)
 CREATE (containerd)-[:IS_AN_IMPLEMENTATION_OF]->(container_runtime)
+CREATE (cri_o)-[:IS_AN_IMPLEMENTATION_OF]->(container_runtime)
 
 // k8 objects relationship to tuorials
 CREATE (cluster)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
