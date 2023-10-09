@@ -2,6 +2,20 @@ MATCH (n)
 DETACH DELETE n;
 
 // Concepts
+MERGE(container:Concept:SoftwareCategory {
+    name: "Container",
+    definitions: [
+        "A container is a runtime environment with all the necessary components—like code, dependencies, and libraries—needed to run the application code without using host machine dependencies. "
+    ]
+}
+)
+MERGE(container_image:Concept:SoftwareCategory {
+    name: "Container",
+    definitions: [
+        "A container image is a standalone, executable file used to create a container. "
+    ]
+}
+)
 MERGE(container_runtime:Concept:SoftwareCategory {
     name: "Container Runtime",
     definitions: [
@@ -145,6 +159,8 @@ CREATE (kubernetes)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_cre
 CREATE (kubernetes)-[:IS_AN_IMPLEMENTATION_OF]->(container_orchestration_tools)
 CREATE (containerd)-[:IS_AN_IMPLEMENTATION_OF]->(container_runtime)
 CREATE (cri_o)-[:IS_AN_IMPLEMENTATION_OF]->(container_runtime)
+CREATE (containerd)-[:RUNS]->(container)
+CREATE (container_image)-[:USED_TO_CREATE]->(container)
 
 // k8 objects relationship to tuorials
 CREATE (cluster)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
