@@ -84,9 +84,25 @@ MERGE(learn_kubernetes_basics_create_cluster:Topic:TutorialSection {name: "creat
 MERGE(learn_kubernetes_basics_create_cluster_cluster_intro:Topic:TutorialSubSection {
     name: "Using Minikube to Create a Cluster",
     url: "https://kubernetes.io/docs/tutorials/kubernetes-basics/create-cluster/cluster-intro/",
-    done: false,
+    done: true,
     completed: false
 }
+)
+MERGE(
+    learn_kubernetes_basics_deploy_an_app:Topic:TutorialSection {
+        name: "Deploy an App",
+        url: "https://kubernetes.io/docs/tutorials/kubernetes-basics/deploy-app/",
+        done: true,
+        completed: false
+    }
+)
+MERGE (
+    learn_kubernetes_basics_deploy_an_app_deploy_intro:TutorialSubSection {
+        name: "Using kubectl to Create a Deployment",
+        url: "https://kubernetes.io/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/",
+        done: false,
+        completed: false
+    }
 )
 
 MERGE (install_minikube:Topic:Task{name: "install minikube", url:"", done: false , completed: false })
@@ -110,6 +126,10 @@ CREATE (learn_kubernetes_basics)-[:INCLUDES]->(learn_kubernetes_basics_create_cl
 CREATE (learn_kubernetes_basics)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_create_cluster)
 CREATE (learn_kubernetes_basics_create_cluster)-[:INCLUDES]->(learn_kubernetes_basics_create_cluster_cluster_intro)
 CREATE (learn_kubernetes_basics_create_cluster)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_create_cluster_cluster_intro)
+CREATE (learn_kubernetes_basics)-[:INCLUDES]->(learn_kubernetes_basics_deploy_an_app)
+CREATE (learn_kubernetes_basics)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_deploy_an_app)
+CREATE (learn_kubernetes_basics)-[:INCLUDES]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
+CREATE (learn_kubernetes_basics)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
 
 // k8 softwares relationships
 CREATE (kubernetes)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
