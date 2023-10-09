@@ -122,6 +122,7 @@ CREATE (cluster)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_create
 CREATE (control_plane)-[:IS_EXPLAINED_IN {depth: 10}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
 CREATE (node)-[:IS_EXPLAINED_IN {depth: 10}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
 CREATE (kubelet)-[:IS_EXPLAINED_IN {depth: 10}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
+
 // k8 objects relationships to each other
 CREATE (control_plane)-[:IS_PART_OF]->(cluster)
 CREATE (node)-[:IS_PART_OF]->(cluster)
@@ -131,6 +132,9 @@ CREATE (control_plane)-[:MANAGES {depth: 10}]->(node)
 CREATE (kubelet)-[:MANAGES {depth: 10}]->(node)
 CREATE (kubelet)-[:COMMUNICATES_TO {depth: 10}]->(control_plane)
 
+
+// k8 objects relationships to other things
+CREATE (node)-[:USES {for:"container operations"}] -> (container_runtime)
 
 // k8 objects management relationships
 CREATE (cluster_management)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
