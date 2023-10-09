@@ -28,6 +28,11 @@ MERGE(kubernetes: KubernetesTool:Software {
     category: "core-software"
 }
 )
+MERGE(containerd: KubernetesTool:Software {
+    name: "containerd",
+    category: "Container Runtime"
+}
+)
 
 // k8 objects
 MERGE(configmap:KubernetesObject {name: "ConfigMap"})
@@ -104,6 +109,7 @@ CREATE (learn_kubernetes_basics_create_cluster)-[:IS_PREREQUISITE_OF]->(learn_ku
 // k8 softwares relationships
 CREATE (kubernetes)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
 CREATE (kubernetes)-[:IS_AN_IMPLEMENTATION_OF]->(container_orchestration_tools)
+CREATE (containerd)-[:IS_AN_IMPLEMENTATION_OF]->(container_runtime)
 
 // k8 objects relationship to tuorials
 CREATE (cluster)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
