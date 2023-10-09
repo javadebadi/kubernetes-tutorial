@@ -69,6 +69,14 @@ MERGE(kubelet:KubernetesObject
     ]
 }
 )
+MERGE(deployment:KubernetesObject 
+{
+    name: "Deployment",
+    definitions: [
+        "A Deployment is responsible for creating and updating instances of your application"
+    ]
+}
+)
 
 // k8 objects managements
 MERGE(configmap_management:KubernetesObjectManagement {name:"ConfigMap Management"})
@@ -128,8 +136,9 @@ CREATE (learn_kubernetes_basics_create_cluster)-[:INCLUDES]->(learn_kubernetes_b
 CREATE (learn_kubernetes_basics_create_cluster)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_create_cluster_cluster_intro)
 CREATE (learn_kubernetes_basics)-[:INCLUDES]->(learn_kubernetes_basics_deploy_an_app)
 CREATE (learn_kubernetes_basics)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_deploy_an_app)
-CREATE (learn_kubernetes_basics)-[:INCLUDES]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
-CREATE (learn_kubernetes_basics)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
+CREATE (learn_kubernetes_basics_deploy_an_app)-[:INCLUDES]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
+CREATE (learn_kubernetes_basics_deploy_an_app)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
+CREATE (learn_kubernetes_basics_create_cluster_cluster_intro)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
 
 // k8 softwares relationships
 CREATE (kubernetes)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
@@ -142,6 +151,7 @@ CREATE (cluster)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_create
 CREATE (control_plane)-[:IS_EXPLAINED_IN {depth: 10}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
 CREATE (node)-[:IS_EXPLAINED_IN {depth: 10}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
 CREATE (kubelet)-[:IS_EXPLAINED_IN {depth: 10}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
+CREATE (deployment)-[:IS_EXPLAINED_IN {depth: 10}]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
 
 // k8 objects relationships to each other
 CREATE (control_plane)-[:IS_PART_OF]->(cluster)
@@ -154,8 +164,10 @@ CREATE (kubelet)-[:COMMUNICATES_TO {depth: 10}]->(control_plane)
 
 
 // k8 objects relationships to other things
-CREATE (node)-[:USES {for:"container operations"}] -> (container_runtime)
+CREATE (node)-[:USES {for:"container operations"}]->(container_runtime)
+CREATE (deployment)-[:LIVES_IN]->(control_plane)
+CREATE (control_plane)-[:USES {for: "scheduling containerized applications in worker nodes"}]->(deployment)
 
-// k8 objects management relationships
+//  k8 objects management relationships
 CREATE (cluster_management)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
 ;
