@@ -13,15 +13,28 @@ MERGE(kubectl_get_command:Command
     description: "list resources"
 }
 )
+MERGE(kubectl_describe_command:Command
+{
+    name: "kubectl describe",
+    description: "show detailed information about a resource"
+}
+)
 MERGE(kubectl_get_pods_command:Command 
     {
         name: "kubectl get pods",
         description: "list pods in the cluster (default namespace)"
     }
 )
-CREATE (kubectl_get_command)-[:IS_A_SUBCOMMAND_OF]->(kubectl)
+MERGE(kubectl_describe_pods_command:Command 
+    {
+        name: "kubectl describe pods",
+        description: "See details about the Pod’s container: IP address, the ports used and a list of events related to the lifecycle of the Pod."
+    }
+)
+CREATE (kubectl_get_command)-[:IS_A_SUBCOMMAND_OF]->(kubectl_command)
 CREATE (kubectl_get_pods_command)-[:IS_AN_EXAMPLE_OF]->(kubectl_get_command)
-
+CREATE (kubectl_describe_command)-[:IS_A_SUBCOMMAND_OF]->(kubectl_command)
+CREATE (kubectl_describe_pods_command)-[:IS_AN_EXAMPLE_OF]->(kubectl_describe_command)
 
 
 // Concepts
