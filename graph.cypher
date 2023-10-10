@@ -95,6 +95,7 @@ MERGE(deployment:KubernetesObject
 // k8 objects managements
 MERGE(configmap_management:KubernetesObjectManagement {name:"ConfigMap Management"})
 MERGE(cluster_management:KubernetesObjectManagement {name: "Cluster Managemet"})
+MERGE(deployment_management_creation:KubernetesObjectManagement {name: "Create Deployment"})
 
 // k8 objects interaction management
 MERGE(configmap_in_pod:KubernetesObjectsInteraction {name:"ConfigMap in Pods"})
@@ -122,6 +123,22 @@ MERGE (
     learn_kubernetes_basics_deploy_an_app_deploy_intro:TutorialSubSection {
         name: "Using kubectl to Create a Deployment",
         url: "https://kubernetes.io/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/",
+        done: true,
+        completed: false
+    }
+)
+MERGE(
+    learn_kubernetes_basics_explore_app:Topic:TutorialSection {
+        name: "Explore Your App",
+        url: "https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/",
+        done: true,
+        completed: false
+    }
+)
+MERGE (
+    learn_kubernetes_basics_explore_app_explore_intro {
+        name: "Viewing Pods and Nodes",
+        url: "https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/explore-intro/",
         done: false,
         completed: false
     }
@@ -143,6 +160,10 @@ CREATE (tcpc) -[:ASSUMES_FAMILIARITY_ABOUT]-> (pod)
 CREATE (configmap_management)-[:IS_EXPLAINED_IN {depth: 100}]->(tcpc)
 CREATE (configmap_in_pod)-[:IS_EXPLAINED_IN {depth: 100}]->(tcpc)
 
+// management 
+// management of deployment
+CREATE (deployment_management_creation)-[:IS_FOR_MANAGEMENT_OF {depth: 10, how: "create deployment"}]->(deployment)
+
 // tutorials chapters and sections relationhisp
 CREATE (learn_kubernetes_basics)-[:INCLUDES]->(learn_kubernetes_basics_create_cluster)
 CREATE (learn_kubernetes_basics)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_create_cluster)
@@ -152,7 +173,14 @@ CREATE (learn_kubernetes_basics)-[:INCLUDES]->(learn_kubernetes_basics_deploy_an
 CREATE (learn_kubernetes_basics)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_deploy_an_app)
 CREATE (learn_kubernetes_basics_deploy_an_app)-[:INCLUDES]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
 CREATE (learn_kubernetes_basics_deploy_an_app)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
+CREATE (learn_kubernetes_basics)-[:INCLUDES]->(learn_kubernetes_basics_explore_app)
+CREATE (learn_kubernetes_basics)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_explore_app)
+CREATE (learn_kubernetes_basics_explore_app)-[:INCLUDES]->(learn_kubernetes_basics_explore_app_explore_intro)
+CREATE (learn_kubernetes_basics_explore_app)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_explore_app_explore_intro)
+
 CREATE (learn_kubernetes_basics_create_cluster_cluster_intro)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
+CREATE (hello_minikube)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
+CREATE(learn_kubernetes_basics_deploy_an_app_deploy_intro)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_explore_app_explore_intro)
 
 // k8 softwares relationships
 CREATE (kubernetes)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
@@ -183,6 +211,7 @@ CREATE (kubelet)-[:COMMUNICATES_TO {depth: 10}]->(control_plane)
 CREATE (node)-[:USES {for:"container operations"}]->(container_runtime)
 CREATE (deployment)-[:LIVES_IN]->(control_plane)
 CREATE (control_plane)-[:USES {for: "scheduling containerized applications in worker nodes"}]->(deployment)
+CREATE (container_image)-[:IS_REQUIRED_TO_CREATE]->(deployment)
 
 //  k8 objects management relationships
 CREATE (cluster_management)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
