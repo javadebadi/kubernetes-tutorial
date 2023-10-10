@@ -10,7 +10,7 @@ MERGE(container:Concept:SoftwareCategory {
 }
 )
 MERGE(container_image:Concept:SoftwareCategory {
-    name: "Container",
+    name: "Container Image",
     definitions: [
         "A container image is a standalone, executable file used to create a container. "
     ]
@@ -55,7 +55,17 @@ MERGE(cri_o: KubernetesTool:Software {
 
 // k8 objects
 MERGE(configmap:KubernetesObject {name: "ConfigMap"})
-MERGE(pod:KubernetesObject {name: "Pod"})
+MERGE(pod:KubernetesObject
+{
+    name: "Pod",
+    definitions: [
+        "A Pod is a group of one or more application containers (such as Docker) and includes shared storage (volumes), IP address and information about how to run them."
+    ],
+    images: [
+        "https://d33wubrfki0l68.cloudfront.net/fe03f68d8ede9815184852ca2a4fd30325e5d15a/98064/docs/tutorials/kubernetes-basics/public/images/module_03_pods.svg"
+    ]
+}
+)
 MERGE(cluster:KubernetesObject {name: "Cluster"})
 MERGE(control_plane:KubernetesObject
     {
@@ -72,6 +82,9 @@ MERGE(node:KubernetesObject
         definitions: [
             "A node is a VM or a physical computer that serves as a worker machine in a Kubernetes cluster.",
             "Nodes are the workers that run applications"
+        ],
+        images: [
+            "https://d33wubrfki0l68.cloudfront.net/5cb72d407cbe2755e581b6de757e0d81760d5b86/a9df9/docs/tutorials/kubernetes-basics/public/images/module_03_nodes.svg"
         ]
     }
 )
@@ -136,7 +149,7 @@ MERGE(
     }
 )
 MERGE (
-    learn_kubernetes_basics_explore_app_explore_intro {
+    learn_kubernetes_basics_explore_app_explore_intro:TutorialSubSection {
         name: "Viewing Pods and Nodes",
         url: "https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/explore-intro/",
         done: false,
@@ -194,8 +207,10 @@ CREATE (container_image)-[:USED_TO_CREATE]->(container)
 CREATE (cluster)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
 CREATE (control_plane)-[:IS_EXPLAINED_IN {depth: 10}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
 CREATE (node)-[:IS_EXPLAINED_IN {depth: 10}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
+CREATE (node)-[:IS_EXPLAINED_IN {depth: 20}]->(learn_kubernetes_basics_explore_app_explore_intro)
 CREATE (kubelet)-[:IS_EXPLAINED_IN {depth: 10}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
 CREATE (deployment)-[:IS_EXPLAINED_IN {depth: 10}]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
+CREATE (pod)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_explore_app_explore_intro)
 
 // k8 objects relationships to each other
 CREATE (control_plane)-[:IS_PART_OF]->(cluster)
@@ -209,7 +224,12 @@ CREATE (kubelet)-[:COMMUNICATES_TO {depth: 10}]->(control_plane)
 
 // k8 objects relationships to other things
 CREATE (node)-[:USES {for:"container operations"}]->(container_runtime)
+CREATE (node)-[:RUNS {for: "container operations including pulling container images from a registry, unpacking the container, and running the application."}]->(container_runtime)
+CREATE (node)-[:RUNS {for: "communicating with control-plane and the Node, management of pods and containers running in the Node" }]->(kubelet)
 CREATE (deployment)-[:LIVES_IN]->(control_plane)
+CREATE (pod)-[:LIVES_IN]->(node)
+CREATE (node)-[:CAN_RUN_MANY]->(pods)
+CREATE (pod)-[:RUNS {details:"Note that many containers can be run in a single pod. Containers should only be scheduled together in a single Pod if they are tightly coupled and need to share resources such as disk."}]->(container)
 CREATE (control_plane)-[:USES {for: "scheduling containerized applications in worker nodes"}]->(deployment)
 CREATE (container_image)-[:IS_REQUIRED_TO_CREATE]->(deployment)
 
