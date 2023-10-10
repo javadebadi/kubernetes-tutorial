@@ -1,6 +1,29 @@
 MATCH (n)
 DETACH DELETE n;
 
+// Commands
+MERGE(kubectl_command:Command
+{
+    name: "kubectl"
+}
+)
+MERGE(kubectl_get_command:Command
+{
+    name: "kubectl get",
+    description: "list resources"
+}
+)
+MERGE(kubectl_get_pods_command:Command 
+    {
+        name: "kubectl get pods",
+        description: "list pods in the cluster (default namespace)"
+    }
+)
+CREATE (kubectl_get_command)-[:IS_A_SUBCOMMAND_OF]->(kubectl)
+CREATE (kubectl_get_pods_command)-[:IS_AN_EXAMPLE_OF]->(kubectl_get_command)
+
+
+
 // Concepts
 MERGE(container:Concept:SoftwareCategory {
     name: "Container",
