@@ -19,6 +19,12 @@ MERGE(kubectl_describe_command:Command
     description: "show detailed information about a resource"
 }
 )
+MERGE(kubectl_logs_command:Command
+{
+    name: "kubectl logs",
+    description: "print the logs from a container in a pod"
+}
+)
 MERGE(kubectl_get_pods_command:Command 
     {
         name: "kubectl get pods",
@@ -35,6 +41,7 @@ CREATE (kubectl_get_command)-[:IS_A_SUBCOMMAND_OF]->(kubectl_command)
 CREATE (kubectl_get_pods_command)-[:IS_AN_EXAMPLE_OF]->(kubectl_get_command)
 CREATE (kubectl_describe_command)-[:IS_A_SUBCOMMAND_OF]->(kubectl_command)
 CREATE (kubectl_describe_pods_command)-[:IS_AN_EXAMPLE_OF]->(kubectl_describe_command)
+CREATE (kubectl_logs_command)-[:IS_AN_EXAMPLE_OF]->(kubectl_command)
 
 
 // Concepts
