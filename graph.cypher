@@ -209,6 +209,22 @@ MERGE (
     learn_kubernetes_basics_explore_app_explore_intro:TutorialSubSection {
         name: "Viewing Pods and Nodes",
         url: "https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/explore-intro/",
+        done: true,
+        completed: false
+    }
+)
+MERGE(
+    learn_kubernetes_basics_expose:Topic:TutorialSection {
+        name: "Expose Your App Publicly",
+        url: "https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/",
+        done: true,
+        completed: false
+    }
+)
+MERGE(
+    learn_kubernetes_basics_expose_intro:Topic:TutorialSubSection {
+        name: "Using a Service to Expose Your App",
+        url: "https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/",
         done: false,
         completed: false
     }
@@ -247,10 +263,16 @@ CREATE (learn_kubernetes_basics)-[:INCLUDES]->(learn_kubernetes_basics_explore_a
 CREATE (learn_kubernetes_basics)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_explore_app)
 CREATE (learn_kubernetes_basics_explore_app)-[:INCLUDES]->(learn_kubernetes_basics_explore_app_explore_intro)
 CREATE (learn_kubernetes_basics_explore_app)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_explore_app_explore_intro)
+CREATE (learn_kubernetes_basics)-[:INCLUDES]->(learn_kubernetes_basics_expose)
+CREATE (learn_kubernetes_basics)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_expose)
+CREATE (learn_kubernetes_basics_expose)-[:INCLUDES]->(learn_kubernetes_basics_expose_intro)
+CREATE (learn_kubernetes_basics_expose)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_expose_intro)
+
 
 CREATE (learn_kubernetes_basics_create_cluster_cluster_intro)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
 CREATE (hello_minikube)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
 CREATE(learn_kubernetes_basics_deploy_an_app_deploy_intro)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_explore_app_explore_intro)
+CREATE (learn_kubernetes_basics_explore_app_explore_intro)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_expose_intro)
 
 // k8 softwares relationships
 CREATE (kubernetes)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
