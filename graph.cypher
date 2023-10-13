@@ -43,12 +43,19 @@ MERGE(kubectl_describe_pods_command:Command
         description: "See details about the Pod’s container: IP address, the ports used and a list of events related to the lifecycle of the Pod."
     }
 )
+MERGE(kubectl_exec_command_how_to_execute_interactive_terminal_inside_a_pod:Command:HowTo
+    {
+        name: "kubectl exec -it $POD_NAME -- /bin/bash",
+        description: "A command to have an interactive bash terminal inside a container of a pod assuming pod name is stored inside $POD_NAME."
+    }
+)
 CREATE (kubectl_get_command)-[:IS_A_SUBCOMMAND_OF]->(kubectl_command)
 CREATE (kubectl_get_pods_command)-[:IS_AN_EXAMPLE_OF]->(kubectl_get_command)
 CREATE (kubectl_describe_command)-[:IS_A_SUBCOMMAND_OF]->(kubectl_command)
 CREATE (kubectl_describe_pods_command)-[:IS_AN_EXAMPLE_OF]->(kubectl_describe_command)
 CREATE (kubectl_logs_command)-[:IS_A_SUBCOMMAND_OF]->(kubectl_command)
 CREATE (kubectl_exec_command)-[:IS_A_SUBCOMMAND_OF]->(kubectl_command)
+CREATE (kubectl_exec_command_how_to_execute_interactive_terminal_inside_a_pod)-[:IS_AN_EXAMPLE_OF]->(kubectl_exec_command)
 
 
 // Concepts
