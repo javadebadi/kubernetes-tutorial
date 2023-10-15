@@ -241,7 +241,15 @@ MERGE(
     learn_kubernetes_basics_expose_intro:Topic:TutorialSubSection {
         name: "Using a Service to Expose Your App",
         url: "https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/",
-        done: false,
+        done: true,
+        completed: false
+    }
+)
+MERGE(
+    learn_kubernetes_basics_scale:Topic:TutorialSection {
+        name: "Scale Your App",
+        url: "https://kubernetes.io/docs/tutorials/kubernetes-basics/scale/",
+        done: true,
         completed: false
     }
 )
@@ -283,6 +291,8 @@ CREATE (learn_kubernetes_basics)-[:INCLUDES]->(learn_kubernetes_basics_expose)
 CREATE (learn_kubernetes_basics)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_expose)
 CREATE (learn_kubernetes_basics_expose)-[:INCLUDES]->(learn_kubernetes_basics_expose_intro)
 CREATE (learn_kubernetes_basics_expose)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_expose_intro)
+CREATE (learn_kubernetes_basics)-[:INCLUDES]->(learn_kubernetes_basics_scale)
+CREATE (learn_kubernetes_basics)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_scale)
 
 
 CREATE (learn_kubernetes_basics_create_cluster_cluster_intro)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
