@@ -161,6 +161,14 @@ MERGE(deployment:KubernetesObject
     ]
 }
 )
+MERGE(service:KubernetesObject
+{
+    name: "Service",
+    definitions: [
+        "Kubernetes Service is an abstraction layer which defines a logical set of Pods and enables external traffic exposure, load balancing and service discovery for those Pods"
+    ]
+}
+)
 
 // k8 objects managements
 MERGE(configmap_management:KubernetesObjectManagement {name:"ConfigMap Management"})
@@ -290,6 +298,7 @@ CREATE (node)-[:IS_EXPLAINED_IN {depth: 20}]->(learn_kubernetes_basics_explore_a
 CREATE (kubelet)-[:IS_EXPLAINED_IN {depth: 10}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
 CREATE (deployment)-[:IS_EXPLAINED_IN {depth: 10}]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
 CREATE (pod)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_explore_app_explore_intro)
+CREATE (service)-[:IS_EXPLAINED_IN {depth: 20}]->(learn_kubernetes_basics_expose_intro)
 
 // k8 objects relationships to each other
 CREATE (control_plane)-[:IS_PART_OF]->(cluster)
