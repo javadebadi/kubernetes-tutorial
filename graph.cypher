@@ -169,6 +169,14 @@ MERGE(service:KubernetesObject
     ]
 }
 )
+MERGE(label:KubernetesObjectMetadata
+{
+    name: "Label",
+    definitions: [
+        "Lables are a way to tag Kubernets resources and can be used as selectors to select specific resources."
+    ]
+}
+)
 
 // k8 objects managements
 MERGE(configmap_management:KubernetesObjectManagement {name:"ConfigMap Management"})
@@ -299,6 +307,7 @@ CREATE (kubelet)-[:IS_EXPLAINED_IN {depth: 10}]->(learn_kubernetes_basics_create
 CREATE (deployment)-[:IS_EXPLAINED_IN {depth: 10}]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
 CREATE (pod)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_explore_app_explore_intro)
 CREATE (service)-[:IS_EXPLAINED_IN {depth: 20}]->(learn_kubernetes_basics_expose_intro)
+CREATE (label)-[:IS_EXPLAINED_IN {depth: 20}]->(learn_kubernetes_basics_expose_intro)
 
 // k8 objects relationships to each other
 CREATE (control_plane)-[:IS_PART_OF]->(cluster)
