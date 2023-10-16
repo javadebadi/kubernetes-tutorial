@@ -269,6 +269,10 @@ MERGE(
         completed: false
     }
 )
+MERGE(
+    learn_kubernetes_basics_update_intro:Topic:TutorialSection {
+        name: "Performing a Rolling Update",
+        url: "https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/",
         done: false,
         completed: false
     }
@@ -318,6 +322,9 @@ CREATE (learn_kubernetes_basics_scale)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_
 CREATE (learn_kubernetes_basics_expose_intro)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_scale_intro)
 CREATE (learn_kubernetes_basics)-[:INCLUDES]->(learn_kubernetes_basics_update)
 CREATE (learn_kubernetes_basics)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_update)
+CREATE (learn_kubernetes_basics_update)-[:INCLUDES]->(learn_kubernetes_basics_update_intro)
+CREATE (learn_kubernetes_basics_update)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_update_intro)
+CREATE (learn_kubernetes_basics_scale_intro)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_update_intro)
 
 
 CREATE (learn_kubernetes_basics_create_cluster_cluster_intro)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
