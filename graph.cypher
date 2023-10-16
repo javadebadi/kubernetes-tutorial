@@ -257,6 +257,18 @@ MERGE(
     learn_kubernetes_basics_scale_intro:Topic:TutorialSection {
         name: "Running Multiple Instances of Your App",
         url: "https://kubernetes.io/docs/tutorials/kubernetes-basics/scale/scale-intro/",
+        done: true,
+        completed: false
+    }
+)
+MERGE(
+    learn_kubernetes_basics_update:Topic:TutorialSection {
+        name: "Update Your App",
+        url: "https://kubernetes.io/docs/tutorials/kubernetes-basics/update/",
+        done: true,
+        completed: false
+    }
+)
         done: false,
         completed: false
     }
@@ -304,6 +316,8 @@ CREATE (learn_kubernetes_basics)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics
 CREATE (learn_kubernetes_basics_scale)-[:INCLUDES]->(learn_kubernetes_basics_scale_intro)
 CREATE (learn_kubernetes_basics_scale)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_scale_intro)
 CREATE (learn_kubernetes_basics_expose_intro)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_scale_intro)
+CREATE (learn_kubernetes_basics)-[:INCLUDES]->(learn_kubernetes_basics_update)
+CREATE (learn_kubernetes_basics)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_update)
 
 
 CREATE (learn_kubernetes_basics_create_cluster_cluster_intro)-[:IS_PREREQUISITE_OF]->(learn_kubernetes_basics_deploy_an_app_deploy_intro)
