@@ -375,3 +375,32 @@ CREATE (container_image)-[:IS_REQUIRED_TO_CREATE]->(deployment)
 //  k8 objects management relationships
 CREATE (cluster_management)-[:IS_EXPLAINED_IN {depth: 50}]->(learn_kubernetes_basics_create_cluster_cluster_intro)
 ;
+
+
+// =====================================================================
+// =====================================================================
+// =====================================================================
+// ============================= Concepts ==============================
+// =====================================================================
+// =====================================================================
+// =====================================================================
+
+// topics (urls)
+// topic -> Parts
+MERGE(webpage_kubernetes_concepts:Topic:KubernetesDocumentPart
+    {
+        name: "Tasks",
+        url: "https://kubernetes.io/docs/concepts/",
+        done: false,
+        completed: false
+    }
+)
+MERGE(webpage_kubernetes_concepts_storage:Topic:KubernetesConceptChapter
+    {
+        name: "Storage",
+        url: "https://kubernetes.io/docs/concepts/storage/",
+        done: false,
+        completed: false,
+    }
+)
+
